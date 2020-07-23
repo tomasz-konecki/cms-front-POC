@@ -1,0 +1,15 @@
+.top-bar {
+  height: 3.5rem;
+  width: 100%;
+  background-color: rgb(31, 31, 31);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  color: #ccc;
+  padding: 1rem;
+  box-sizing: border-box;
+  box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: space-between;
+}

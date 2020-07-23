@@ -1,0 +1,14 @@
+.room-view {
+  width: 80%;
+  // font-size: 1.4rem;
+  color: lighten(darkslategrey, 35);
+  padding-left: 2rem;
+  background-color: rgb(34, 59, 59);
+
+  &-selection-prompt {
+    font-size: 2.5rem;
+    color: darkslategrey;
+    text-align: center;
+    padding-top: 4rem;
+  }
+}

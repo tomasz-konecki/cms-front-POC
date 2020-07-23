@@ -1,0 +1,17 @@
+.localizations {
+  width: 20%;
+  padding-left: 1rem;
+
+  &-tree {
+    max-width: 12rem;
+    color: paleturquoise;
+  }
+}
+.group {
+  color: rgb(136, 187, 187);
+}
+
+.selected {
+  color: palegoldenrod;
+  background-color: rgba(83, 117, 117, 0.3);
+}

@@ -1,0 +1,21 @@
+.room-view-header {
+  display: flex;
+
+  &-title {
+    color: lighten(darkslategrey, 20);
+    padding-right: 1rem;
+  }
+
+  &-location,
+  &-site,
+  &-floor,
+  &-room {
+    text-transform: capitalize;
+  }
+}
+.arrow {
+  &::before {
+    content: "\20\3E";
+    color: lighten(darkslategrey, 18);
+  }
+}
