@@ -1,0 +1,14 @@
+.expand-dial {
+  transform: translateZ(0px);
+  flex-grow: 1;
+  position: relative;
+  height: 1.5rem;
+  z-index: 20;
+
+  &-circle {
+    position: absolute;
+    top: -0.2rem;
+    right: -1.8rem;
+    transform: scale(0.5);
+  }
+}

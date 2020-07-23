@@ -2,7 +2,8 @@
   display: flex;
 
   &-title {
-    color: lighten(darkslategrey, 20);
+    // color: lighten(darkslategrey, 20);
+    color: #ccc;
     padding-right: 1rem;
   }
 
@@ -11,11 +12,12 @@
   &-floor,
   &-room {
     text-transform: capitalize;
+    color: #bbb;
   }
 }
 .arrow {
   &::before {
     content: "\20\3E";
-    color: lighten(darkslategrey, 18);
+    color: #aaa;
   }
 }

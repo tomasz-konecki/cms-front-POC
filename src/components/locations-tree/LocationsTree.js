@@ -6,6 +6,7 @@ import TreeItem from "@material-ui/lab/TreeItem";
 import Scrollbars from "react-custom-scrollbars";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import ExpandDial from "./components/expand-dial/ExpandDial";
 
 import classes from "./LocationsTree.module.scss";
 
@@ -31,13 +32,11 @@ function LocationsTree() {
   const { push } = useHistory();
 
   const handleToggle = (event, nodeIds) => {
-    console.log("expanded:", nodeIds);
     setExpanded(nodeIds);
     push("/");
   };
 
   const handleSelect = (event, nodeIds) => {
-    console.log("selected:", nodeIds);
     setSelected(nodeIds);
     push("/");
   };
@@ -57,8 +56,10 @@ function LocationsTree() {
 
   return (
     <div className={classes["localizations"]}>
-      <button onClick={handleExpandAll}>Expand all</button>
-      <button onClick={handleCollapseAll}>Collapse all</button>
+      <ExpandDial
+        handleExpandAll={handleExpandAll}
+        handleCollapseAll={handleCollapseAll}
+      />
       <Scrollbars
         className={classes["scrollbar"]}
         autoHeight
