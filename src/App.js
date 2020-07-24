@@ -1,14 +1,20 @@
 import React from "react";
-import { HashRouter as Router } from "react-router-dom";
-import Routs from "components/routs/Routs";
+import Layout from "components/ui/layout/Layout";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
+
+import MainView from "components/main-view/MainView";
 
 import "styles/global-styles.scss";
 
 function App() {
   return (
-    <Router>
-      <Routs />
-    </Router>
+    <Layout>
+      <Router>
+        <Switch>
+          <Route path="*" component={MainView} />
+        </Switch>
+      </Router>
+    </Layout>
   );
 }
 

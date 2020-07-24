@@ -3,8 +3,8 @@ import { object } from "prop-types";
 
 import classes from "./Header.module.scss";
 
-function Header({ selectedRoom }) {
-  const { parentLocation, site, floor, room } = selectedRoom;
+function Header({ location }) {
+  const { parentLocation, site, floor, room } = location;
 
   return (
     <div className={classes["room-view-header"]}>
@@ -19,15 +19,15 @@ function Header({ selectedRoom }) {
       </div>
       <div className={classes["room-view-header-floor"]}>
         {floor}
-        <span className={classes["arrow"]}>&nbsp;</span>
+        {room && <span className={classes["arrow"]}>&nbsp;</span>}
       </div>
-      <div className={classes["room-view-header-room"]}>{room}</div>
+      {room && <div className={classes["room-view-header-room"]}>{room}</div>}
     </div>
   );
 }
 
 Header.propTypes = {
-  selectedRoom: object
+  location: object
 };
 
 export default Header;

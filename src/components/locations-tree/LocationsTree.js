@@ -80,45 +80,49 @@ function LocationsTree() {
             classes={{ group: classes["group"] }}
           >
             <TreeItem nodeId="boi-one-bank-street" label="One Bank Street">
-              <TreeItem nodeId="boi-one-bank-street-floor-1" label="Floor 1">
-                <Link to="boi/one-bank-street/floor-1/room-1">
-                  <TreeItem
-                    nodeId="boi-one-bank-street-floor-1-room-1"
-                    label="Room 1"
-                    classes={{ selected: classes["selected"] }}
-                  />
-                </Link>
-                <Link to="boi/one-bank-street/floor-1/room-2">
-                  <TreeItem
-                    nodeId="boi-one-bank-street-floor-1-room-2"
-                    label="Room 2"
-                    classes={{ selected: classes["selected"] }}
-                  />
-                </Link>
-              </TreeItem>
-              <TreeItem nodeId="boi-one-bank-street-floor-2" label="Floor 2">
-                <Link to="boi/one-bank-street/floor-2/room-1">
-                  <TreeItem
-                    nodeId="boi-one-bank-street-floor-2-room-1"
-                    label="Room 1"
-                    classes={{ selected: classes["selected"] }}
-                  />
-                </Link>
-                <Link to="boi/one-bank-street/floor-2/room-2">
-                  <TreeItem
-                    nodeId="boi-one-bank-street-floor-2-room-2"
-                    label="Room 2"
-                    classes={{ selected: classes["selected"] }}
-                  />
-                </Link>
-                <Link to="boi/one-bank-street/floor-2/room-3">
-                  <TreeItem
-                    nodeId="boi-one-bank-street-floor-2-room-3"
-                    label="Room 3"
-                    classes={{ selected: classes["selected"] }}
-                  />
-                </Link>
-              </TreeItem>
+              <Link to="boi/one-bank-street/floor-1">
+                <TreeItem nodeId="boi-one-bank-street-floor-1" label="Floor 1">
+                  <Link to="boi/one-bank-street/floor-1/room-1">
+                    <TreeItem
+                      nodeId="boi-one-bank-street-floor-1-room-1"
+                      label="Room 1"
+                      classes={{ selected: classes["selected"] }}
+                    />
+                  </Link>
+                  <Link to="boi/one-bank-street/floor-1/room-2">
+                    <TreeItem
+                      nodeId="boi-one-bank-street-floor-1-room-2"
+                      label="Room 2"
+                      classes={{ selected: classes["selected"] }}
+                    />
+                  </Link>
+                </TreeItem>
+              </Link>
+              <Link to="boi/one-bank-street/floor-2">
+                <TreeItem nodeId="boi-one-bank-street-floor-2" label="Floor 2">
+                  <Link to="boi/one-bank-street/floor-2/room-1">
+                    <TreeItem
+                      nodeId="boi-one-bank-street-floor-2-room-1"
+                      label="Room 1"
+                      classes={{ selected: classes["selected"] }}
+                    />
+                  </Link>
+                  <Link to="boi/one-bank-street/floor-2/room-2">
+                    <TreeItem
+                      nodeId="boi-one-bank-street-floor-2-room-2"
+                      label="Room 2"
+                      classes={{ selected: classes["selected"] }}
+                    />
+                  </Link>
+                  <Link to="boi/one-bank-street/floor-2/room-3">
+                    <TreeItem
+                      nodeId="boi-one-bank-street-floor-2-room-3"
+                      label="Room 3"
+                      classes={{ selected: classes["selected"] }}
+                    />
+                  </Link>
+                </TreeItem>
+              </Link>
             </TreeItem>
             <TreeItem nodeId="boi-tower-hill" label="Tower Hill">
               <TreeItem nodeId="tower-hill-floor-1" label="Floor 1">

@@ -1,8 +1,8 @@
 .room-view-header {
   display: flex;
+  padding: 0.5rem 0;
 
   &-title {
-    // color: lighten(darkslategrey, 20);
     color: #ccc;
     padding-right: 1rem;
   }

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Header from "./components/header/Header";
+import Header from "../main-view/components/header/Header";
+import RoomStatus from "./components/room-status/RoomStatus";
 
 import classes from "./RoomView.module.scss";
-import SpaceStatus from "./components/space-status/SpaceStatus";
 
 const locations = {
   boi: "Bank Of Ireland",
@@ -27,7 +27,7 @@ function RoomView() {
       parentLocation: locations[locationArray[1]],
       site: locationArray[2].replace(/-/g, " "),
       floor: locationArray[3].replace("-", " "),
-      room: locationArray[4].replace("-", " ")
+      room: locationArray[4] ? locationArray[4].replace("-", " ") : ""
     };
 
     setSelectedRoom(roomObject);
@@ -44,15 +44,11 @@ function RoomView() {
 
   return (
     <div className={classes["room-view"]}>
-      {isRoomSelected ? (
+      {isRoomSelected && (
         <>
-          <Header selectedRoom={selectedRoom} />
-          <SpaceStatus />
+          <Header location={selectedRoom} />
+          <RoomStatus />
         </>
-      ) : (
-        <div className={classes["room-view-selection-prompt"]}>
-          Please select location
-        </div>
       )}
     </div>
   );
