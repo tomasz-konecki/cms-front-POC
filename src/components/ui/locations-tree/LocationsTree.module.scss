@@ -1,6 +1,9 @@
-.localizations {
+@import "../../../styles/color-setup.scss";
+
+.locations {
   width: 20%;
   padding-left: 1rem;
+  background-color: $secondary;
 
   &-tree {
     max-width: 12rem;

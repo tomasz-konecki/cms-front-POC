@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 
-import LocalizationsTree from "components/locations-tree/LocationsTree";
-import FloorView from "components/floor-view/FloorView";
-import RoomView from "components/room-view/RoomView";
+import LocationsTree from "components/ui/locations-tree/LocationsTree";
+import FloorView from "components/views/floor-view/FloorView";
 import SelectionPrompt from "./components/selection-prompt/SelectionPrompt";
 import AnalogClock from "./components/analog-clock/AnalogClock";
 
@@ -12,7 +11,6 @@ import classes from "./MainView.module.scss";
 
 function MainView() {
   const { pathname } = useLocation();
-  const [renderRoom, setRenderRoom] = useState(null);
   const [renderFloor, setRenderFloor] = useState(null);
   const [renderPrompt, setRenderPrompt] = useState(true);
 
@@ -43,24 +41,17 @@ function MainView() {
     if (pathname === "/") {
       setRenderPrompt(true);
       setRenderFloor(false);
-      setRenderRoom(false);
-    } else if (pathname.includes("floor") && !pathname.includes("room")) {
+    } else if (pathname.includes("floor")) {
       setRenderPrompt(false);
-      setRenderRoom(false);
       setRenderFloor(true);
-    } else if (pathname.includes("floor") && pathname.includes("room")) {
-      setRenderPrompt(false);
-      setRenderFloor(false);
-      setRenderRoom(true);
     }
   }, [pathname]);
 
   return (
     <div className={classes["main-view"]}>
-      <LocalizationsTree />
+      <LocationsTree />
       {renderFloor && <FloorView />}
-      {renderRoom && <RoomView />}
-      {renderFloor || renderRoom ? <AnalogClock /> : null}
+      {renderFloor ? <AnalogClock /> : null}
       <SelectionPrompt open={renderPrompt} />
     </div>
   );

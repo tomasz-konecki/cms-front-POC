@@ -3,7 +3,7 @@ import Layout from "components/ui/layout/Layout";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
-import MainView from "components/main-view/MainView";
+import MainView from "components/views/main-view/MainView";
 
 import "styles/global-styles.scss";
 

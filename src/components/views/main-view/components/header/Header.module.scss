@@ -1,0 +1,32 @@
+@import "../../../../../styles/color-setup.scss";
+
+.floor-view-header {
+  display: flex;
+  padding: 0.5rem 0;
+  // background-color: $secondary;
+  background: linear-gradient(
+    90deg,
+    rgba(47, 79, 79, 1) 28%,
+    rgba(34, 59, 59, 1) 45%
+  );
+  padding-left: 1.5rem;
+
+  &-title {
+    color: #dd8818;
+    padding-right: 0.5rem;
+  }
+
+  &-location,
+  &-site,
+  &-floor,
+  &-room {
+    text-transform: capitalize;
+    color: #bbb;
+  }
+}
+.arrow {
+  &::before {
+    content: "\20\3E";
+    color: #aaa;
+  }
+}

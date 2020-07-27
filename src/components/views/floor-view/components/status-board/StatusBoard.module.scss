@@ -1,0 +1,41 @@
+.floor-status {
+  &-container {
+    background: darkslategrey;
+    width: 18rem;
+    padding: 1rem;
+    border-radius: 0.3rem;
+    margin-left: 1rem;
+    margin-top: 1rem;
+    box-shadow: 0px 2px 4px 0px rgba(23, 23, 23, 0.75);
+  }
+
+  &-title {
+    padding-bottom: 1em;
+    padding-left: 0.4rem;
+    color: lighten(darkslategrey, 40);
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &-values {
+    background-color: #223b3b;
+    padding: 0.6rem;
+    border-radius: 0.3rem;
+
+    .total {
+      color: #ccc;
+    }
+
+    .occupied {
+      color: #ff4500;
+    }
+
+    .vacant {
+      color: #00fa9a;
+    }
+
+    .td-width {
+      width: 14.4rem;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+.floor {
+  &-view {
+    width: 80%;
+    color: lighten(darkslategrey, 35);
+    // padding-left: 2rem;
+    background-color: rgb(34, 59, 59);
+    box-sizing: border-box;
+  }
+
+  &-status {
+    height: 39rem;
+    padding-right: 1rem;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+  }
+}
