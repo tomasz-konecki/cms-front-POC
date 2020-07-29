@@ -3,6 +3,7 @@ import Layout from "components/ui/layout/Layout";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
+import Home from "components/home/Home";
 import MainView from "components/views/main-view/MainView";
 
 import "styles/global-styles.scss";
@@ -18,7 +19,9 @@ function App() {
       <Layout>
         <Router>
           <Switch>
+            <Route path="/" exact component={Home} />
             <Route path="*" component={MainView} />
+            {/* <Redirect from="/" to="/auth" exact /> */}
           </Switch>
         </Router>
       </Layout>

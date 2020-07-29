@@ -12,20 +12,22 @@ import ExpandDial from "./components/expand-dial/ExpandDial";
 
 import classes from "./LocationsTree.module.scss";
 
-function LocationsTreeDynamic(props) {
+function LocationsTree(props) {
   const [locations, setLocations] = useState([]);
   const [expanded, setExpanded] = useState([]);
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState("");
   const [allExpanded, setAllExpanded] = useState([]);
   const { push } = useHistory();
 
   const handleToggle = (event, nodeIds) => {
     setExpanded(nodeIds);
+    localStorage.setItem("expanded", nodeIds);
     push("/");
   };
 
   const handleSelect = (event, nodeIds) => {
     setSelected(nodeIds);
+    localStorage.setItem("selected", nodeIds);
     push("/");
   };
 
@@ -35,12 +37,22 @@ function LocationsTreeDynamic(props) {
 
   const handleCollapseAll = () => {
     setExpanded([]);
-    setSelected([]);
-    push("/");
+    setSelected("");
+    localStorage.setItem("expanded", "");
+    localStorage.setItem("selected", "");
+    push("/main-view");
   };
 
   useEffect(() => {
     setLocations(loacationsData);
+    setExpanded(
+      localStorage.getItem("expanded")
+        ? localStorage.getItem("expanded").split(",")
+        : []
+    );
+    setSelected(
+      localStorage.getItem("selected") ? localStorage.getItem("selected") : ""
+    );
   }, []);
 
   useEffect(() => {
@@ -65,22 +77,24 @@ function LocationsTreeDynamic(props) {
           onNodeSelect={handleSelect}
         >
           {locations.map(location => (
-            <TreeItem
-              key={location.id}
-              nodeId={location.id}
-              label={location.name}
-              classes={{ group: classes["group"] }}
-            >
-              {location.floors.map(floor => (
-                <Link to={floor.path} key={floor.id}>
-                  <TreeItem
-                    nodeId={floor.id}
-                    label={floor.name}
-                    classes={{ selected: classes["selected"] }}
-                  />
-                </Link>
-              ))}
-            </TreeItem>
+            <Link to="main-view" key={location.name}>
+              <TreeItem
+                key={location.id}
+                nodeId={location.id}
+                label={location.name}
+                classes={{ group: classes["group"] }}
+              >
+                {location.floors.map(floor => (
+                  <Link to={floor.path} key={floor.id}>
+                    <TreeItem
+                      nodeId={floor.id}
+                      label={floor.name}
+                      classes={{ selected: classes["selected"] }}
+                    />
+                  </Link>
+                ))}
+              </TreeItem>
+            </Link>
           ))}
         </TreeView>
       </Scrollbars>
@@ -88,6 +102,6 @@ function LocationsTreeDynamic(props) {
   );
 }
 
-LocationsTreeDynamic.propTypes = {};
+LocationsTree.propTypes = {};
 
-export default LocationsTreeDynamic;
+export default LocationsTree;

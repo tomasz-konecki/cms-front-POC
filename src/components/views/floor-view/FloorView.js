@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-// import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import Header from "../main-view/components/header/Header";
 import StatusBoard from "./components/status-board/StatusBoard";
 import HeatMapGrid from "./components/heat-map-grid/HeatMapGrid";
@@ -22,30 +22,39 @@ function FloorView() {
   const [vacant, setVacant] = useState(null);
   const { pathname } = useLocation();
 
-  // const SENSORS = gql`
-  //   query GetSensors {
-  //     SensorEntries {
-  //       parentName
-  //       sensorType
-  //       parentPath
-  //       createdAt
-  //       status
-  //     }
-  //   }
-  // `;
+  const SENSORS = gql`
+    query GetSensors($limit: Int) {
+      SensorEntries(limit: $limit) {
+        parentName
+        sensorType
+        parentPath
+        createdAt
+        status
+      }
+    }
+  `;
 
-  // const { data, loading, error } = useQuery(SENSORS);
+  const { data, loading, error } = useQuery(SENSORS, {
+    variables: { limit: 15 }
+  });
+
+  console.log(">>> SENSORS DATA:", data);
 
   const setUpRoomObject = () => {
     const locationArray = pathname.split("/");
 
-    const floorObject = {
-      parentLocation: locationArray[1].replace(/-/g, " "),
-      site: locationArray[2].replace(/-/g, " "),
-      floor: locationArray[3].replace("-", " ")
-    };
+    if (locationArray.length > 2) {
+      const floorObject = {
+        parentLocation: locationArray[1].replace(/-/g, " "),
+        site: locationArray[2].replace(/-/g, " "),
+        floor:
+          locationArray[3] === "floor-gnd"
+            ? "Ground Floor"
+            : locationArray[3].replace("-", " ")
+      };
 
-    setSelectedFloor(floorObject);
+      setSelectedFloor(floorObject);
+    }
   };
 
   useEffect(() => {

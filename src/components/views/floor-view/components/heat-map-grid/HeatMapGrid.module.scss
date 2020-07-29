@@ -1,20 +1,64 @@
-.heat-map-grid {
+@import "../../../../../styles/color-setup.scss";
+
+.heat-map {
   position: absolute;
-  bottom: 1rem;
+  box-sizing: border-box;
+  bottom: -0.5rem;
   left: 1.1rem;
-  width: 97.3%;
+  width: 98%;
   height: 26rem;
   padding-bottom: 1rem;
   padding-right: 1.5rem;
-  background-color: darkslategrey;
-  box-sizing: border-box;
-  overflow: hidden;
+  padding-left: 1rem;
+  background-color: $secondary;
+  border-radius: 0.3rem;
+  box-shadow: 0px 2px 4px 0px rgba(23, 23, 23, 0.75);
 
-  &-label {
-    padding: 1rem 0 1.5rem 2.5rem;
-    color: lighten(darkslategrey, 40);
+  &-top-bar {
+    display: flex;
+    justify-content: space-between;
+
+    &-label {
+      padding: 1rem 0 1.5rem 0.7rem;
+      color: lighten($secondary, 40);
+    }
+
+    &-radio-buttons {
+    }
   }
-}
 
-.scrollbar {
+  &-grid {
+    background-color: $primary;
+    width: 97%;
+    margin: 0 auto;
+    padding-top: 0.5rem;
+    padding-right: 1.7rem;
+    padding-bottom: 1rem;
+    border-radius: 0.3rem;
+
+    &-scrollbars {
+      animation-name: show-map;
+      animation: show-map 200ms ease-out;
+    }
+
+    @keyframes show-map {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    &-loader {
+      height: 20rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
+  .radio-buttons {
+    align-self: center;
+  }
 }

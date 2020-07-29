@@ -3,25 +3,30 @@
 .floor-view-header {
   display: flex;
   padding: 0.5rem 0;
-  // background-color: $secondary;
-  background: linear-gradient(
-    90deg,
-    rgba(47, 79, 79, 1) 28%,
-    rgba(34, 59, 59, 1) 45%
-  );
+  // background: linear-gradient(
+  //   90deg,
+  //   rgba(47, 79, 79, 1) 25%,
+  //   rgba(34, 59, 59, 1) 40%
+  // );
+  background-color: $secondary;
   padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  justify-content: space-between;
 
-  &-title {
-    color: #dd8818;
-    padding-right: 0.5rem;
-  }
+  &-location {
+    display: flex;
+    &-label {
+      color: #dd8818;
+      padding-right: 0.5rem;
+    }
 
-  &-location,
-  &-site,
-  &-floor,
-  &-room {
-    text-transform: capitalize;
-    color: #bbb;
+    &-main,
+    &-site,
+    &-floor,
+    &-room {
+      text-transform: capitalize;
+      color: #bbb;
+    }
   }
 }
 .arrow {

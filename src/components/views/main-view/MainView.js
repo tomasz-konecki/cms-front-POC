@@ -38,7 +38,7 @@ function MainView() {
   // }, [data, error]);
 
   useEffect(() => {
-    if (pathname === "/") {
+    if (pathname === "/main-view") {
       setRenderPrompt(true);
       setRenderFloor(false);
     } else if (pathname.includes("floor")) {
@@ -51,7 +51,7 @@ function MainView() {
     <div className={classes["main-view"]}>
       <LocationsTree />
       {renderFloor && <FloorView />}
-      {renderFloor ? <AnalogClock /> : null}
+      {/* {renderFloor ? <AnalogClock /> : null} */}
       <SelectionPrompt open={renderPrompt} />
     </div>
   );

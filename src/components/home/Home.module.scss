@@ -1,0 +1,30 @@
+.home {
+  background-color: darkcyan;
+  height: 88vh;
+  padding-top: 5rem;
+
+  .form {
+    width: 30rem;
+    height: 10rem;
+    margin: 0 auto;
+    margin-top: 8rem;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.3rem;
+    box-shadow: 0px 2px 4px 0px rgba(23, 23, 23, 0.75);
+
+    &-input {
+      display: block;
+      margin: 0 auto;
+      margin-top: 3rem;
+      width: 15rem;
+    }
+  }
+
+  .button-container {
+    width: 15.2rem;
+    margin: 0 auto;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
