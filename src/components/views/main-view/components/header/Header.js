@@ -1,6 +1,6 @@
 import React from "react";
 import { object } from "prop-types";
-import useCurrentTime from "components/hooks/useCurrentTime";
+import useCurrentTime from "hooks/useCurrentTime";
 
 import classes from "./Header.module.scss";
 

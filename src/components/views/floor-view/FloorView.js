@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { gql, useQuery } from "@apollo/client";
+import { gql, useQuery, useLazyQuery } from "@apollo/client";
 import Header from "../main-view/components/header/Header";
 import StatusBoard from "./components/status-board/StatusBoard";
 import HeatMapGrid from "./components/heat-map-grid/HeatMapGrid";
@@ -22,7 +22,7 @@ function FloorView() {
   const [vacant, setVacant] = useState(null);
   const { pathname } = useLocation();
 
-  const SENSORS = gql`
+  const GET_SENSORS = gql`
     query GetSensors($limit: Int) {
       SensorEntries(limit: $limit) {
         parentName
@@ -34,11 +34,13 @@ function FloorView() {
     }
   `;
 
-  const { data, loading, error } = useQuery(SENSORS, {
-    variables: { limit: 15 }
-  });
+  // const { data, loading, error } = useQuery(GET_SENSORS, {
+  //   variables: { limit: 15 }
+  // });
 
-  console.log(">>> SENSORS DATA:", data);
+  const [getSensors, { loading, data }] = useLazyQuery(GET_SENSORS);
+
+  console.log(">>> GET_SENSORS DATA:", data);
 
   const setUpRoomObject = () => {
     const locationArray = pathname.split("/");
@@ -84,7 +86,14 @@ function FloorView() {
       {isFloorSelected && (
         <>
           <Header location={selectedFloor} />
-          <div className={classes["floor-status"]}>
+          <div
+            className={classes["floor-status"]}
+            onClick={() =>
+              getSensors({
+                variables: { limit: 15 }
+              })
+            }
+          >
             <StatusBoard occupied={occupied} vacant={vacant} />
             <HeatMapGrid occupied={occupied} vacant={vacant} />
           </div>
