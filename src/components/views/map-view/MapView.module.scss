@@ -1,0 +1,14 @@
+.map {
+  &-view {
+    position: relative;
+    margin: 0 auto;
+    width: 35rem;
+    transform: scale(0.9);
+  }
+
+  &-img {
+    &-container {
+      width: 100%;
+    }
+  }
+}

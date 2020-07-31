@@ -5,6 +5,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
 import Home from "components/home/Home";
 import MainView from "components/views/main-view/MainView";
+import MapView from "components/views/map-view/MapView";
 
 import "styles/global-styles.scss";
 
@@ -19,8 +20,8 @@ function App() {
       <Layout>
         <Router>
           <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="*" component={MainView} />
+            {/* <Route path="/" exact component={Home} /> */}
+            <Route path="*" component={MapView} />
             {/* <Redirect from="/" to="/auth" exact /> */}
           </Switch>
         </Router>

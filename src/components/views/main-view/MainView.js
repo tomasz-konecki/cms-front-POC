@@ -14,29 +14,6 @@ function MainView() {
   const [renderFloor, setRenderFloor] = useState(null);
   const [renderPrompt, setRenderPrompt] = useState(true);
 
-  // const SENSORS = gql`
-  //   query GetSensors {
-  //     SensorEntries {
-  //       parentName
-  //       sensorType
-  //       parentPath
-  //       createdAt
-  //       status
-  //     }
-  //   }
-  // `;
-
-  // const { data, loading, error } = useQuery(SENSORS);
-
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log(data.SensorEntries);
-  //   }
-  //   if (error) {
-  //     console.log(error.message);
-  //   }
-  // }, [data, error]);
-
   useEffect(() => {
     if (pathname === "/main-view") {
       setRenderPrompt(true);
