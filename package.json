@@ -19,6 +19,7 @@
     "react-dom": "^16.13.1",
     "react-heatmap-grid": "^0.8.2",
     "react-hook-form": "^6.1.1",
+    "react-indiana-drag-scroll": "^1.6.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-swipeable-views": "^0.13.9"

@@ -2,18 +2,45 @@ import { gql } from "@apollo/client";
 
 const GET_CLIENTS = gql`
   query GetClients {
-    UsersInfo {
+    ClientsInfo {
       id
-      email
-      firstname
-      lastname
-      clients {
-        id
+      name
+      code
+      sites {
         name
-        sites {
-          id
+        path
+        subLocalizations {
           name
+          type
           path
+          subLocalizations {
+            name
+            type
+            path
+            subLocalizations {
+              name
+              type
+              path
+              subLocalizations {
+                name
+                type
+                path
+                status
+                subLocalizations {
+                  name
+                  type
+                  path
+                  status
+                  subLocalizations {
+                    name
+                    type
+                    path
+                    status
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

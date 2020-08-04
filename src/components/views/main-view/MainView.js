@@ -5,9 +5,10 @@ import { gql, useQuery } from "@apollo/client";
 import LocationsTree from "components/ui/locations-tree/LocationsTree";
 import FloorView from "components/views/floor-view/FloorView";
 import SelectionPrompt from "./components/selection-prompt/SelectionPrompt";
-import AnalogClock from "./components/analog-clock/AnalogClock";
+// import AnalogClock from "./components/analog-clock/AnalogClock";
 
 import classes from "./MainView.module.scss";
+import MapView from "../map-view/MapView";
 
 function MainView() {
   const { pathname } = useLocation();
@@ -29,7 +30,8 @@ function MainView() {
       <LocationsTree />
       {renderFloor && <FloorView />}
       {/* {renderFloor ? <AnalogClock /> : null} */}
-      <SelectionPrompt open={renderPrompt} />
+      {/* <SelectionPrompt open={renderPrompt} /> */}
+      <MapView />
     </div>
   );
 }

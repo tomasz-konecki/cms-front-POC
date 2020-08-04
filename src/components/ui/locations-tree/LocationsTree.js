@@ -3,6 +3,7 @@ import { TreeView, TreeItem } from "@material-ui/lab";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Scrollbars from "react-custom-scrollbars";
+import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useQuery, useLazyQuery } from "@apollo/client";
@@ -15,8 +16,7 @@ import ExpandDial from "./components/expand-dial/ExpandDial";
 import classes from "./LocationsTree.module.scss";
 
 function LocationsTree(props) {
-  const [mainLocations, setMainLocation] = useState([]);
-  const [subLocations, setSubLocations] = useState([]);
+  const [mainLocations, setMainLocations] = useState([]);
   const [expanded, setExpanded] = useState([]);
   const [selected, setSelected] = useState("");
   const [allExpanded, setAllExpanded] = useState([]);
@@ -26,82 +26,37 @@ function LocationsTree(props) {
     loading: clientsLoading,
     error: clientsError
   } = useQuery(GET_CLIENTS);
-  const [
-    getSublocations,
-    { loading: getSublocationsLoading, data: sublocationsData }
-  ] = useLazyQuery(GET_LOCATIONS);
 
   const handleToggle = (event, nodeIds) => {
     setExpanded(nodeIds);
     localStorage.setItem("expanded", nodeIds);
-    push("/");
+    // push("/");
   };
 
   const handleSelect = (event, nodeIds) => {
     setSelected(nodeIds);
     localStorage.setItem("selected", nodeIds);
-    push("/");
+    // push("/");
   };
 
   useEffect(() => {
     if (clientsData) {
-      setMainLocation(clientsData.UsersInfo.clients);
+      setMainLocations(clientsData.ClientsInfo);
     }
   }, [clientsData]);
 
-  useEffect(() => {
-    if (mainLocations.length) {
-      // console.log(">>> mainLocations loaded:", mainLocations);
-      setSubLocations(new Array(mainLocations.length));
-
-      mainLocations.forEach((mainLocation, index) => {
-        const newArray = [...subLocations, { name: mainLocation.name }];
-
-        console.log("### mainLocation name:", mainLocation.name);
-
-        setSubLocations(newArray);
-        mainLocation.sites.forEach(site => {
-          console.log("Fetch sublocations for:", mainLocation.id, site.path);
-          getSublocations({
-            variables: {
-              path: site.path,
-              clientId: mainLocation.id
-            }
-          });
-        });
-      });
-    }
-  }, [mainLocations]);
-
-  useEffect(() => {
-    console.log("*** subLocationsData:", sublocationsData);
-  }, [sublocationsData]);
-
-  console.log("~~~ subLocations:", subLocations);
-
-  // const createSublocations = id => {
-  //   const sites = mainLocations.filter(item => item.id === id)[0].sites;
-  //   const sublocationPaths = sites.map(item => item.path);
-
-  //   console.log(">>> clientSublocationPaths:", sublocationPaths);
-
-  //   return (
-  //     <>
-  //       {sublocationPaths.map(path => (
-  //         <div>{path}</div>
-  //       ))}
-  //     </>
-  //   );
-  // };
-
-  // console.log("*** subLocationsData:", data);
-
   return (
     <div className={classes["locations"]}>
-      {getSublocationsLoading && (
-        <h4 style={{ color: "beige" }}>Sublocations loading...</h4>
+      {clientsLoading && <h4 style={{ color: "beige" }}>Loading...</h4>}
+      {expanded.length > 0 && (
+        <div
+          className={classes["hide-all-icon-container"]}
+          onClick={() => setExpanded([])}
+        >
+          <ExpandLessIcon className={classes["hide-all-icon"]} />
+        </div>
       )}
-      <Scrollbars autoHeight autoHeightMax="88vh">
+      <Scrollbars autoHeight autoHeightMax="94vh">
         <TreeView
           classes={{ root: classes["locations-tree"] }}
           defaultCollapseIcon={<ExpandMoreIcon />}
@@ -111,41 +66,89 @@ function LocationsTree(props) {
           onNodeToggle={handleToggle}
           onNodeSelect={handleSelect}
         >
-          {/* {mainLocations.map(location => (
-            <Link to="main-view" key={location.name}>
-              <TreeItem
-                key={location.id}
-                nodeId={location.id}
-                label={location.name}
-                classes={{ group: classes["group"] }}
-              >
-                {location.floors.map(floor => (
-                  <Link to={floor.path} key={floor.id}>
-                    <TreeItem
-                      nodeId={floor.id}
-                      label={floor.name}
-                      classes={{ selected: classes["selected"] }}
-                    />
-                  </Link>
-                ))}
-              </TreeItem>
-            </Link>
-          ))} */}
           {mainLocations.map(mainLocation => (
             <TreeItem
               key={mainLocation.id}
               nodeId={mainLocation.id}
               label={mainLocation.name}
-              classes={{ group: classes["group"] }}
+              // classes={{ group: classes["group"] }}
             >
               {mainLocation.sites.map(site => (
                 <TreeItem
-                  key={site.id}
-                  nodeId={site.id}
+                  key={site.path}
+                  nodeId={site.path}
                   label={site.name}
-                  classes={{ selected: classes["selected"] }}
+                  // classes={{ selected: classes["selected"] }}
                 >
-                  {/* {createSublocations(mainLocation.id)} */}
+                  {site.subLocalizations.map(subLevel_1 => (
+                    <TreeItem
+                      key={subLevel_1.path}
+                      nodeId={subLevel_1.path}
+                      label={subLevel_1.name}
+                      // classes={{ selected: classes["selected"] }}
+                    >
+                      {subLevel_1.subLocalizations.map(subLevel_2 => (
+                        <TreeItem
+                          key={subLevel_2.path}
+                          nodeId={subLevel_2.path}
+                          label={subLevel_2.name}
+                        >
+                          {subLevel_2.subLocalizations
+                            ? subLevel_2.subLocalizations.map(subLevel_3 => (
+                                <TreeItem
+                                  key={subLevel_3.path}
+                                  nodeId={subLevel_3.path}
+                                  label={subLevel_3.name}
+                                >
+                                  {subLevel_3.subLocalizations
+                                    ? subLevel_3.subLocalizations.map(
+                                        subLevel_4 => (
+                                          <TreeItem
+                                            key={subLevel_4.path}
+                                            nodeId={subLevel_4.path}
+                                            label={subLevel_4.name}
+                                          >
+                                            {subLevel_4.subLocalizations
+                                              ? subLevel_4.subLocalizations.map(
+                                                  subLevel_5 => (
+                                                    <TreeItem
+                                                      key={subLevel_5.path}
+                                                      nodeId={subLevel_5.path}
+                                                      label={subLevel_5.name}
+                                                    >
+                                                      {subLevel_5.type ===
+                                                      "BENCH"
+                                                        ? subLevel_5.subLocalizations.map(
+                                                            subLevel_6 => (
+                                                              <TreeItem
+                                                                key={
+                                                                  subLevel_6.path
+                                                                }
+                                                                nodeId={
+                                                                  subLevel_6.path
+                                                                }
+                                                                label={
+                                                                  subLevel_6.name
+                                                                }
+                                                              />
+                                                            )
+                                                          )
+                                                        : null}
+                                                    </TreeItem>
+                                                  )
+                                                )
+                                              : null}
+                                          </TreeItem>
+                                        )
+                                      )
+                                    : null}
+                                </TreeItem>
+                              ))
+                            : null}
+                        </TreeItem>
+                      ))}
+                    </TreeItem>
+                  ))}
                 </TreeItem>
               ))}
             </TreeItem>
