@@ -1,10 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import SwipeableViews from "react-swipeable-views";
 import { useForm } from "react-hook-form";
 import clsx from "clsx";
 import { useHistory } from "react-router-dom";
+import { useLazyQuery } from "@apollo/client";
 
 import { emailRegEx } from "../../data/constants";
+import { GET_ALL_LOCATIONS } from "queries/queries";
 
 import classes from "./Home.module.scss";
 
@@ -13,6 +15,9 @@ function Home() {
   const [formTouched, setFormTouched] = useState(false);
   const passwordInputRef = useRef(null);
   const { push } = useHistory();
+  const [getAllLOcations, { loading, data, error }] = useLazyQuery(
+    GET_ALL_LOCATIONS
+  );
 
   const {
     register,
@@ -37,6 +42,17 @@ function Home() {
   const onSubmit = data => {
     // handleLogin(data);
   };
+
+  const handleSignIn = () => {
+    // push("/main-view");
+    getAllLOcations({ variables: {} });
+  };
+
+  useEffect(() => {
+    console.log("Home.js, data:", data);
+    console.log("Home.js, loading:", loading);
+    console.log("Home.js, error:", error);
+  }, [data, loading, error]);
 
   return (
     <div className={classes["home"]}>
@@ -97,7 +113,7 @@ function Home() {
               data-cy="sign-in"
               className={classes["sign-in-button"]}
               type="submit"
-              onClick={() => push("/main-view")}
+              onClick={handleSignIn}
             >
               Sign In
             </button>

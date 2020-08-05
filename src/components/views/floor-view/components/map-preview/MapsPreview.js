@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 import classes from "./MapsPreview.module.scss";
 
 function MapsPreview({ previews }) {
-  console.log("previews:", previews);
-
   return (
     <div className={classes["map-preview"]}>
       {previews && (

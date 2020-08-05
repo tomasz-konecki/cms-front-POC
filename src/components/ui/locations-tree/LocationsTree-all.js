@@ -9,7 +9,7 @@ import { useHistory } from "react-router-dom";
 import { useQuery, useLazyQuery } from "@apollo/client";
 
 // import { loacationsData } from "data/locationsData";
-import { GET_CLIENTS, GET_LOCATIONS } from "queries/queries";
+import { GET_ALL_LOCATIONS } from "queries/queries";
 
 import ExpandDial from "./components/expand-dial/ExpandDial";
 
@@ -25,7 +25,7 @@ function LocationsTree(props) {
     data: clientsData,
     loading: clientsLoading,
     error: clientsError
-  } = useQuery(GET_CLIENTS);
+  } = useQuery(GET_ALL_LOCATIONS);
 
   const handleToggle = (event, nodeIds) => {
     setExpanded(nodeIds);

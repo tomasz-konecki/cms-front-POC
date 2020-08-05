@@ -30,10 +30,6 @@ function LocationsTree({ loading }) {
     push("/main-view");
   };
 
-  useEffect(() => {
-    push("/main-view");
-  }, []);
-
   return (
     <div className={classes["locations"]}>
       {loading && <h4 style={{ color: "beige" }}>Loading...</h4>}
@@ -66,7 +62,9 @@ function LocationsTree({ loading }) {
                 <TreeItem key={site.path} nodeId={site.path} label={site.name}>
                   {site.subLocalizations.map(subLevel_1 => (
                     <Link
-                      to={encodeURIComponent(subLevel_1.path)}
+                      to={`floor-view?floor=${encodeURIComponent(
+                        subLevel_1.path
+                      )}`}
                       key={subLevel_1.path}
                     >
                       <TreeItem
