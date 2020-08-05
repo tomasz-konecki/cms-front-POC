@@ -7,6 +7,8 @@ import Home from "components/home/Home";
 import MainView from "components/views/main-view/MainView";
 import MapView from "components/views/map-view/MapView";
 
+import { LocationsContextProvider } from "contexts/locations-context/LocationsContext";
+
 import "styles/global-styles.scss";
 
 const client = new ApolloClient({
@@ -18,13 +20,15 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Layout>
-        <Router>
-          <Switch>
-            {/* <Route path="/" exact component={Home} /> */}
-            <Route path="*" component={MainView} />
-            {/* <Redirect from="/" to="/auth" exact /> */}
-          </Switch>
-        </Router>
+        <LocationsContextProvider>
+          <Router>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              {/* <Redirect from="/" to="/auth" exact /> */}
+              <Route path="*" component={MainView} />
+            </Switch>
+          </Router>
+        </LocationsContextProvider>
       </Layout>
     </ApolloProvider>
   );

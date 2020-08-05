@@ -49,7 +49,8 @@ export const sensors = [
     sensorType: "PRESENCE_DESK",
     sigfoxId: null,
     x: 73,
-    y: 77
+    y: 77,
+    path: "IRL/D18_PH48/BPL/F01/C03/R01/B01/D001"
   },
   {
     id: null,
@@ -114,7 +115,8 @@ export const sensors = [
     sensorType: "PRESENCE_DESK",
     sigfoxId: null,
     x: 73,
-    y: 141
+    y: 141,
+    path: "IRL/D18_PH48/BPL/F01/C03/R01/B01/D002"
   },
   {
     id: null,

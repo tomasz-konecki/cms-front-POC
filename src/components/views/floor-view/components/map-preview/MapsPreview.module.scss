@@ -1,0 +1,31 @@
+.map-preview {
+  width: 77rem;
+  // border: 1px solid gold;
+  height: 25rem;
+  padding-top: 1rem;
+  padding-left: 2rem;
+  box-sizing: border-box;
+
+  &-gallery {
+    // border: 1px solid red;
+    height: 100%;
+    display: flex;
+    // justify-content: flex-start;
+
+    &-preview {
+      height: 23rem;
+      width: 14rem;
+      margin-right: 1.5rem;
+      &-image {
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        transition: filter 0.2s ease-out;
+
+        &:hover {
+          filter: brightness(70%);
+        }
+      }
+    }
+  }
+}

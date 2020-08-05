@@ -1,18 +1,45 @@
-.scroll-container {
-  height: calc(100vh - 0.5rem);
+.map-view-modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 1);
+  z-index: 30;
 
-  .map {
-    &-view {
-      position: relative;
-      margin: 0 auto;
-      width: 35rem;
-      // transform: scale(0.9);
-    }
+  .scroll-container {
+    height: calc(100vh - 0.5rem);
 
-    &-img {
-      &-container {
-        width: 100%;
+    .map {
+      &-view {
+        position: relative;
+        margin: 0 auto;
+        width: 35rem;
+        // transform: scale(0.9);
+      }
+
+      &-img {
+        &-container {
+          width: 100%;
+        }
       }
     }
   }
+}
+
+.close {
+  height: 1.5rem;
+  width: 1.5rem;
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  color: aliceblue;
+  border: 2px solid aliceblue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 0.8rem;
+  font-weight: bold;
+  z-index: 40;
+  cursor: pointer;
 }

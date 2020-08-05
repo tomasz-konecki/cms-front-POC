@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-const GET_CLIENTS = gql`
+const GET_ALL_LOCATIONS = gql`
   query GetClients {
     ClientsInfo {
       id
@@ -47,47 +47,19 @@ const GET_CLIENTS = gql`
   }
 `;
 
-const GET_LOCATIONS = gql`
-  query GetLocations($path: String!, $clientId: String!) {
-    LocalizationInfo(path: $path, clientId: $clientId) {
+const GET_CLIENTS_LEVEL = gql`
+  query GetClientsLevel {
+    ClientsInfo {
+      id
       name
       code
-      type
-      path
-      subLocalizations {
+      sites {
         name
-        code
-        type
         path
         subLocalizations {
           name
-          code
           type
           path
-          subLocalizations {
-            name
-            code
-            type
-            path
-            subLocalizations {
-              name
-              code
-              type
-              path
-              subLocalizations {
-                name
-                code
-                type
-                path
-                subLocalizations {
-                  name
-                  code
-                  type
-                  path
-                }
-              }
-            }
-          }
         }
       }
     }
@@ -106,4 +78,4 @@ const GET_SENSORS = gql`
   }
 `;
 
-export { GET_CLIENTS, GET_LOCATIONS, GET_SENSORS };
+export { GET_ALL_LOCATIONS, GET_SENSORS };
