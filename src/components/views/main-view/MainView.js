@@ -12,25 +12,13 @@ import MapView from "../map-view/MapView";
 import classes from "./MainView.module.scss";
 
 function MainView() {
-  // const [locations, setLocations] = useState([]);
   const { pathname } = useLocation();
   const [renderFloor, setRenderFloor] = useState(null);
   const [renderMapView, setRenderMapView] = useState(false);
   const [renderPrompt, setRenderPrompt] = useState(true);
   const { locations, setLocations } = useContext(LocationsContext);
-  const [selectedMap, setSelectedMap] = useState("");
 
   const { data: locationsData, loading, error } = useQuery(GET_ALL_LOCATIONS);
-
-  const handleMapSelection = mapPath => {
-    setSelectedMap(mapPath);
-    setRenderPrompt(false);
-    setRenderMapView(true);
-  };
-
-  const closeMapView = () => {
-    setRenderMapView(false);
-  };
 
   useEffect(() => {
     if (locationsData) {
@@ -39,10 +27,12 @@ function MainView() {
   }, [locationsData]);
 
   useEffect(() => {
-    if (pathname === "/main-view") {
+    const decodedPathname = decodeURIComponent(pathname);
+
+    if (decodedPathname === "/main-view") {
       setRenderPrompt(true);
       setRenderFloor(false);
-    } else if (pathname.split("/").length === 5) {
+    } else if (decodedPathname.split("/").length === 5) {
       setRenderPrompt(false);
       setRenderFloor(true);
     }
@@ -51,10 +41,8 @@ function MainView() {
   return (
     <div className={classes["main-view"]}>
       <LocationsTree locations={locations} loading={loading} />
-      {renderFloor && <FloorView handleMapSelection={handleMapSelection} />}
-      {renderMapView && (
-        <MapView selectedMap={selectedMap} closeMapView={closeMapView} />
-      )}
+      {renderFloor && <FloorView />}
+      {renderMapView && <MapView />}
       {renderPrompt && <SelectionPrompt />}
     </div>
   );

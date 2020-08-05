@@ -1,27 +1,31 @@
 import React from "react";
-import { array, func } from "prop-types";
+import { array } from "prop-types";
+import { Link } from "react-router-dom";
 
 import classes from "./MapsPreview.module.scss";
 
-function MapsPreview({ previews, handleMapSelection }) {
+function MapsPreview({ previews }) {
+  console.log("previews:", previews);
+
   return (
     <div className={classes["map-preview"]}>
       {previews && (
         <div className={classes["map-preview-gallery"]}>
           {previews.map(preview => (
-            <div
-              key={preview.path}
-              className={classes["map-preview-gallery-preview"]}
-              onClick={() => handleMapSelection(preview.path)}
-            >
-              <div className={classes["map-preview-gallery-preview-name"]}>
-                {preview.name}
+            <Link to={`map-view?map=${encodeURIComponent(preview.path)}`}>
+              <div
+                key={preview.path}
+                className={classes["map-preview-gallery-preview"]}
+              >
+                <div className={classes["map-preview-gallery-preview-name"]}>
+                  {preview.name}
+                </div>
+                <img
+                  src={preview.src}
+                  className={classes["map-preview-gallery-preview-image"]}
+                />
               </div>
-              <img
-                src={preview.src}
-                className={classes["map-preview-gallery-preview-image"]}
-              />
-            </div>
+            </Link>
           ))}
         </div>
       )}
@@ -30,8 +34,7 @@ function MapsPreview({ previews, handleMapSelection }) {
 }
 
 MapsPreview.propTypes = {
-  previews: array,
-  handleMapSelection: func
+  previews: array
 };
 
 export default MapsPreview;

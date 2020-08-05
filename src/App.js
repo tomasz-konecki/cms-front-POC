@@ -24,7 +24,7 @@ function App() {
           <Router>
             <Switch>
               <Route path="/" exact component={Home} />
-              {/* <Redirect from="/" to="/auth" exact /> */}
+              <Route path="/map-view" component={MapView} />
               <Route path="*" component={MainView} />
             </Switch>
           </Router>

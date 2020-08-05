@@ -65,7 +65,10 @@ function LocationsTree({ loading }) {
               {mainLocation.sites.map(site => (
                 <TreeItem key={site.path} nodeId={site.path} label={site.name}>
                   {site.subLocalizations.map(subLevel_1 => (
-                    <Link to={subLevel_1.path} key={subLevel_1.path}>
+                    <Link
+                      to={encodeURIComponent(subLevel_1.path)}
+                      key={subLevel_1.path}
+                    >
                       <TreeItem
                         key={subLevel_1.path}
                         nodeId={subLevel_1.path}
