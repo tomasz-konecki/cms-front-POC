@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
 import SwipeableViews from "react-swipeable-views";
 import { useForm } from "react-hook-form";
 import clsx from "clsx";
@@ -7,6 +7,7 @@ import { useLazyQuery } from "@apollo/client";
 
 import { emailRegEx } from "../../data/constants";
 import { GET_ALL_LOCATIONS } from "queries/queries";
+import LocationsContext from "contexts/locations-context/LocationsContext";
 
 import classes from "./Home.module.scss";
 
@@ -18,6 +19,7 @@ function Home() {
   const [getAllLOcations, { loading, data, error }] = useLazyQuery(
     GET_ALL_LOCATIONS
   );
+  const { locations, setLocations } = useContext(LocationsContext);
 
   const {
     register,
@@ -44,82 +46,92 @@ function Home() {
   };
 
   const handleSignIn = () => {
-    // push("/main-view");
     getAllLOcations({ variables: {} });
   };
 
   useEffect(() => {
-    console.log("Home.js, data:", data);
-    console.log("Home.js, loading:", loading);
-    console.log("Home.js, error:", error);
+    if (data) {
+      console.log("Home.js, data:", data.ClientsInfo);
+      setLocations(data.ClientsInfo);
+    }
   }, [data, loading, error]);
+
+  useEffect(() => {
+    if (locations.length) {
+      push("/main-view");
+    }
+  }, [locations]);
 
   return (
     <div className={classes["home"]}>
-      <form
-        className={classes["form"]}
-        autoComplete="off"
-        onSubmit={handleSubmit(onSubmit)}
-      >
-        <SwipeableViews index={tabIndex}>
-          <div>
-            <input
-              autoFocus
-              type="text"
-              name="email"
-              placeholder="Email"
-              className={clsx(classes["form-input"], {
-                [classes["form-input-error"]]: errors.email
-              })}
-              onKeyPress={onFormKeyPress}
-              ref={register({
-                required: "Required",
-                pattern: {
-                  value: emailRegEx,
-                  message: "Invalid email address"
-                }
-              })}
-              // onFocus={() => clearError("email")}
-            />
+      {!loading && locations.length === 0 ? (
+        <form
+          className={classes["form"]}
+          autoComplete="off"
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <SwipeableViews index={tabIndex}>
+            <div>
+              <input
+                autoFocus
+                type="text"
+                name="email"
+                placeholder="Email"
+                className={clsx(classes["form-input"], {
+                  [classes["form-input-error"]]: errors.email
+                })}
+                onKeyPress={onFormKeyPress}
+                ref={register({
+                  required: "Required",
+                  pattern: {
+                    value: emailRegEx,
+                    message: "Invalid email address"
+                  }
+                })}
+                // onFocus={() => clearError("email")}
+              />
+            </div>
+            <div>
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                className={clsx(classes["form-input"], {
+                  [classes["form-input-error"]]: errors.password
+                })}
+                ref={e => {
+                  register(e, {
+                    required: "Required"
+                  });
+                  passwordInputRef.current = e;
+                }}
+                data-cy="password"
+              />
+            </div>
+          </SwipeableViews>
+          <div className={classes["button-container"]}>
+            {tabIndex === 0 ? (
+              <button
+                className={classes["sign-in-button"]}
+                onClick={handleNextButton}
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                data-cy="sign-in"
+                className={classes["sign-in-button"]}
+                type="submit"
+                onClick={handleSignIn}
+              >
+                Sign In
+              </button>
+            )}
           </div>
-          <div>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              className={clsx(classes["form-input"], {
-                [classes["form-input-error"]]: errors.password
-              })}
-              ref={e => {
-                register(e, {
-                  required: "Required"
-                });
-                passwordInputRef.current = e;
-              }}
-              data-cy="password"
-            />
-          </div>
-        </SwipeableViews>
-        <div className={classes["button-container"]}>
-          {tabIndex === 0 ? (
-            <button
-              className={classes["sign-in-button"]}
-              onClick={handleNextButton}
-            >
-              Next
-            </button>
-          ) : (
-            <button
-              data-cy="sign-in"
-              className={classes["sign-in-button"]}
-              type="submit"
-              onClick={handleSignIn}
-            >
-              Sign In
-            </button>
-          )}
-        </div>
-      </form>
+        </form>
+      ) : loading && locations.length === 0 ? (
+        <div className={classes["loader"]}>LOADING LOCATIONS DATA...</div>
+      ) : null}
     </div>
   );
 }

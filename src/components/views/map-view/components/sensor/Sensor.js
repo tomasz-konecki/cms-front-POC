@@ -1,22 +1,29 @@
 import React from "react";
-import { object } from "prop-types";
+import { object, string } from "prop-types";
+import clsx from "clsx";
 
 import classes from "./Sensor.module.scss";
 
-function Sensor({ sensor }) {
+function Sensor({ sensor, status }) {
+  console.log("STATUS:", status);
+
   return (
     <div
-      className={classes["sensor"]}
+      className={clsx(classes["sensor"], {
+        [classes["red"]]: status === "BUSY",
+        [classes["green"]]: status === "FREE"
+      })}
       style={{ top: `${sensor.y - 8}px`, left: `${sensor.x - 7}px` }}
       onClick={() => alert("Sensor index:" + sensor.index)}
     >
-      {sensor.index}
+      {/* {sensor.index} */}
     </div>
   );
 }
 
 Sensor.propTypes = {
-  sensor: object
+  sensor: object,
+  status: string
 };
 
 export default Sensor;

@@ -12,23 +12,41 @@ import LocationsContext from "contexts/locations-context/LocationsContext";
 import classes from "./LocationsTree.module.scss";
 
 function LocationsTree({ loading }) {
-  const [expanded, setExpanded] = useState([]);
-  const [selected, setSelected] = useState("");
-  const [allExpanded, setAllExpanded] = useState([]);
+  const getExpandedFromLocalStorage = () => {
+    const localData = localStorage.getItem("expanded");
+    return localData ? localData.split(",") : [];
+  };
+  const [expanded, setExpanded] = useState(getExpandedFromLocalStorage());
+  const getSelectedFromLocalStorage = () => {
+    const localData = localStorage.getItem("selected");
+    return localData ? localData : "";
+  };
+  const [selected, setSelected] = useState(getSelectedFromLocalStorage());
   const { push } = useHistory();
-  const { locations, setLocations } = useContext(LocationsContext);
+  const { locations } = useContext(LocationsContext);
 
-  const handleToggle = (event, nodeIds) => {
+  const handleToggle = (_, nodeIds) => {
     setExpanded(nodeIds);
     localStorage.setItem("expanded", nodeIds);
+    // push("/main-view");
+  };
+
+  const handleSelect = (_, nodeIds) => {
+    setSelected(nodeIds);
+    localStorage.setItem("selected", nodeIds);
+    // push("/main-view");
+  };
+
+  const handleHideAll = () => {
+    setExpanded([]);
+    localStorage.setItem("expanded", "");
+    localStorage.setItem("selected", "");
     push("/main-view");
   };
 
-  const handleSelect = (event, nodeIds) => {
-    setSelected(nodeIds);
-    localStorage.setItem("selected", nodeIds);
-    push("/main-view");
-  };
+  useEffect(() => {
+    localStorage.setItem("csm-locations", JSON.stringify(locations));
+  }, [locations]);
 
   return (
     <div className={classes["locations"]}>
@@ -36,7 +54,7 @@ function LocationsTree({ loading }) {
       {expanded.length > 0 && (
         <div
           className={classes["hide-all-icon-container"]}
-          onClick={() => setExpanded([])}
+          onClick={handleHideAll}
         >
           <ExpandLessIcon className={classes["hide-all-icon"]} />
         </div>

@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 
 const LocationsContext = createContext({
   locations: [],
@@ -6,7 +6,15 @@ const LocationsContext = createContext({
 });
 
 export function LocationsContextProvider({ children }) {
-  const [locations, setLocations] = useState([]);
+  const getLocationsFromLocalStorage = () => {
+    const localData = localStorage.getItem("csm-locations");
+    return localData ? JSON.parse(localData) : [];
+  };
+  const [locations, setLocations] = useState(getLocationsFromLocalStorage());
+
+  useEffect(() => {
+    localStorage.setItem("csm-locations", JSON.stringify(locations));
+  }, [locations]);
 
   return (
     <LocationsContext.Provider value={{ locations, setLocations }}>
