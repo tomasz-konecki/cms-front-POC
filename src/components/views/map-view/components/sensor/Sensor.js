@@ -5,8 +5,6 @@ import clsx from "clsx";
 import classes from "./Sensor.module.scss";
 
 function Sensor({ sensor, status }) {
-  console.log("STATUS:", status);
-
   return (
     <div
       className={clsx(classes["sensor"], {
