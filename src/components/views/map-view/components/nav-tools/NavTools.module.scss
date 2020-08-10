@@ -1,0 +1,22 @@
+.nav-tools {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding-top: 0.2rem;
+  padding-bottom: 0.2rem;
+  padding-left: 0.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 40;
+
+  .close {
+    color: aliceblue;
+    font-weight: bold;
+    cursor: pointer;
+  }
+}
+
+.btn-group {
+  padding-right: 0.8rem;
+}
