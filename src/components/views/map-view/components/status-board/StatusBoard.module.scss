@@ -1,5 +1,5 @@
-.floor-status {
-  &-container {
+.status {
+  &-board {
     background: darkslategrey;
     width: 18rem;
     padding: 1rem;
@@ -7,6 +7,11 @@
     margin-top: 1rem;
     border-radius: 0.3rem;
     box-shadow: 0px 2px 4px 0px rgba(23, 23, 23, 0.75);
+    position: absolute;
+    top: -0.5rem;
+    right: 0.2rem;
+    z-index: 60;
+    opacity: 0.95;
   }
 
   &-title {
@@ -27,11 +32,15 @@
     }
 
     .occupied {
-      color: #ff4500;
+      color: red;
     }
 
     .vacant {
-      color: #00fa9a;
+      color: chartreuse;
+    }
+
+    .off-period {
+      color: rgb(165, 165, 165);
     }
 
     .td-width {
