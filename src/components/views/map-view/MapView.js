@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import useQuery from "hooks/useQuery";
@@ -9,6 +8,8 @@ import LocationsContext from "contexts/locations-context/LocationsContext";
 
 import NavTools from "./components/nav-tools/NavTools";
 import Sensor from "./components/sensor/Sensor";
+import BackArrow from "./components/back-arrow/BackArrow";
+import StatusBoard from "./components/status-board/StatusBoard";
 
 import classes from "./MapView.module.scss";
 
@@ -26,8 +27,9 @@ function MapView() {
   });
   const [benches, setBenches] = useState([]);
   const [desks, setDesks] = useState([]);
-  const [y, setY] = useState(150);
-  const [currentScale, setCurrentScale] = useState(null);
+  let occupied = 0;
+  let vacant = 0;
+  let offPeriod = 0;
 
   const setMapImageSource = (mapPath, queryArray) => {
     queryArray.pop();
@@ -147,66 +149,68 @@ function MapView() {
     findDesks();
   }, [benches]);
 
+  useEffect(() => {
+    // Function to count desk statuses
+  }, []);
+
   return desks.length ? (
-    <div className={classes["map-view"]}>
-      <div className={classes["map"]}>
-        <TransformWrapper
-          defaultScale={1}
-          positionX={100}
-          positionY={y}
-          wheel={{
-            step: 200
-          }}
-          options={{
-            limitToBounds: false,
-            minScale: 0.5,
-            maxScale: 4
-            // maxPositionY: 20,
-            // maxPositionX: 376
-          }}
-          // scalePadding={{
-          //   disabled: true,
-          //   size: 0
-          // }}
-        >
-          {({
-            zoomIn,
-            zoomOut,
-            resetTransform,
-            positionX,
-            positionY,
-            setPositionY,
-            scale,
-            ...rest
-          }) => (
-            <>
-              <NavTools
-                zoomIn={zoomIn}
-                zoomOut={zoomOut}
-                resetTransform={resetTransform}
-                positionX={positionX}
-                positionY={positionY}
-                setPositionY={setPositionY}
-                scale={scale}
-              />
-              <TransformComponent>
-                <div className={classes["map-container"]}>
-                  <div className={classes["map-img-container"]}>
-                    <img src={mapImage} className={classes["map-img"]} />
-                    {mapSensors.map(sensor => (
-                      <Sensor
-                        key={sensor.path}
-                        sensor={sensor}
-                        status={getSensorStatus(sensor.path)}
-                      />
-                    ))}
-                  </div>
+    <div className={classes["map-modal"]}>
+      <TransformWrapper
+        defaultScale={1}
+        positionX={100}
+        wheel={{
+          step: 200
+        }}
+        options={{
+          limitToBounds: false,
+          minScale: 0.5,
+          maxScale: 4
+        }}
+      >
+        {({
+          zoomIn,
+          zoomOut,
+          resetTransform,
+          positionX,
+          positionY,
+          setPositionY,
+          scale,
+          ...rest
+        }) => (
+          <div className={classes["map"]}>
+            <BackArrow />
+            <StatusBoard
+              total={mapSensors.length}
+              vacant={vacant}
+              occupied={occupied}
+              // offPeriod={offPeriod}
+            />
+            <TransformComponent>
+              <div className={classes["map-container"]}>
+                <div className={classes["map-img-container"]}>
+                  <img src={mapImage} className={classes["map-img"]} />
+                  {mapSensors.map(sensor => (
+                    <Sensor
+                      key={sensor.path}
+                      sensor={sensor}
+                      status={getSensorStatus(sensor.path)}
+                    />
+                  ))}
                 </div>
-              </TransformComponent>
-            </>
-          )}
-        </TransformWrapper>
-      </div>
+              </div>
+            </TransformComponent>
+            <NavTools
+              zoomIn={zoomIn}
+              zoomOut={zoomOut}
+              resetTransform={resetTransform}
+              positionX={positionX}
+              positionY={positionY}
+              setPositionY={setPositionY}
+              scale={scale}
+            />
+          </div>
+        )}
+      </TransformWrapper>
     </div>
   ) : null;
 }

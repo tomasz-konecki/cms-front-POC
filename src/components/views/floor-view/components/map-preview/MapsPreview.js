@@ -10,7 +10,10 @@ function MapsPreview({ previews }) {
       {previews && (
         <div className={classes["map-preview-gallery"]}>
           {previews.map(preview => (
-            <Link to={`map-view?map=${encodeURIComponent(preview.path)}`}>
+            <Link
+              to={`map-view?map=${encodeURIComponent(preview.path)}`}
+              key={preview.path}
+            >
               <div
                 key={preview.path}
                 className={classes["map-preview-gallery-preview"]}

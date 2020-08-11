@@ -1,4 +1,4 @@
-.map-view {
+.map-modal {
   width: 100vw;
   height: 100vh;
   position: absolute;
@@ -8,6 +8,8 @@
   z-index: 30;
 
   .map {
+    position: relative;
+
     &-container {
       display: flex;
       justify-content: center;

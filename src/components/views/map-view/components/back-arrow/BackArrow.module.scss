@@ -1,0 +1,16 @@
+.back-arrow {
+  width: 2rem;
+  height: 2rem;
+  font-weight: bold;
+  position: absolute;
+  top: 0.8rem;
+  left: 1.7rem;
+  color: aliceblue;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  padding-top: 0.25rem;
+  padding-left: 0.5rem;
+  box-sizing: border-box;
+  cursor: pointer;
+  z-index: 50;
+}

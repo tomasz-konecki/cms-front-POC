@@ -51,7 +51,6 @@ function Home() {
 
   useEffect(() => {
     if (data) {
-      console.log("Home.js, data:", data.ClientsInfo);
       setLocations(data.ClientsInfo);
     }
   }, [data, loading, error]);
