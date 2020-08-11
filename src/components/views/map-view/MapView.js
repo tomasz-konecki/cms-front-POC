@@ -1,7 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import ScrollContainer from "react-indiana-drag-scroll";
 import { useHistory } from "react-router-dom";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 
 import useQuery from "hooks/useQuery";
@@ -9,6 +7,7 @@ import { sensors } from "data/sensors/sensors";
 import previews from "data/previews";
 import LocationsContext from "contexts/locations-context/LocationsContext";
 
+import NavTools from "./components/nav-tools/NavTools";
 import Sensor from "./components/sensor/Sensor";
 
 import classes from "./MapView.module.scss";
@@ -18,7 +17,6 @@ function MapView() {
   const [mapImage, setMapImage] = useState(null);
   const [mapSensors, setMapSensors] = useState([]);
   const query = useQuery();
-  const history = useHistory();
   const [sitePath, setSitePath] = useState("");
   const [floorPath, setFloorPath] = useState("");
   const [compartmentPath, setCompartmentPath] = useState("");
@@ -28,6 +26,8 @@ function MapView() {
   });
   const [benches, setBenches] = useState([]);
   const [desks, setDesks] = useState([]);
+  const [y, setY] = useState(150);
+  const [currentScale, setCurrentScale] = useState(null);
 
   const setMapImageSource = (mapPath, queryArray) => {
     queryArray.pop();
@@ -147,31 +147,68 @@ function MapView() {
     findDesks();
   }, [benches]);
 
-  return (
-    <>
-      <div className={classes["close"]} onClick={() => history.goBack()}>
-        <ArrowBackIosIcon />
+  return desks.length ? (
+    <div className={classes["map-view"]}>
+      <div className={classes["map"]}>
+        <TransformWrapper
+          defaultScale={1}
+          positionX={100}
+          positionY={y}
+          wheel={{
+            step: 200
+          }}
+          options={{
+            limitToBounds: false,
+            minScale: 0.5,
+            maxScale: 4
+            // maxPositionY: 20,
+            // maxPositionX: 376
+          }}
+          // scalePadding={{
+          //   disabled: true,
+          //   size: 0
+          // }}
+        >
+          {({
+            zoomIn,
+            zoomOut,
+            resetTransform,
+            positionX,
+            positionY,
+            setPositionY,
+            scale,
+            ...rest
+          }) => (
+            <>
+              <NavTools
+                zoomIn={zoomIn}
+                zoomOut={zoomOut}
+                resetTransform={resetTransform}
+                positionX={positionX}
+                positionY={positionY}
+                setPositionY={setPositionY}
+                scale={scale}
+              />
+              <TransformComponent>
+                <div className={classes["map-container"]}>
+                  <div className={classes["map-img-container"]}>
+                    <img src={mapImage} className={classes["map-img"]} />
+                    {mapSensors.map(sensor => (
+                      <Sensor
+                        key={sensor.path}
+                        sensor={sensor}
+                        status={getSensorStatus(sensor.path)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </TransformComponent>
+            </>
+          )}
+        </TransformWrapper>
       </div>
-      {desks.length > 0 && (
-        <div className={classes["map-view"]}>
-          <ScrollContainer className={classes["scroll-container"]}>
-            <div className={classes["map"]}>
-              <div className={classes["map-img-container"]}>
-                <img src={mapImage} className={classes["map-img"]} />
-                {mapSensors.map(sensor => (
-                  <Sensor
-                    key={sensor.path}
-                    sensor={sensor}
-                    status={getSensorStatus(sensor.path)}
-                  />
-                ))}
-              </div>
-            </div>
-          </ScrollContainer>
-        </div>
-      )}
-    </>
-  );
+    </div>
+  ) : null;
 }
 
 MapView.propTypes = {};

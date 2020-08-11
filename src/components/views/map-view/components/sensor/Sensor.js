@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { object, string } from "prop-types";
 import clsx from "clsx";
 
@@ -12,9 +12,8 @@ function Sensor({ sensor, status }) {
         [classes["green"]]: status === "FREE"
       })}
       style={{ top: `${sensor.y - 8}px`, left: `${sensor.x - 7}px` }}
-      onClick={() => alert("Sensor index:" + sensor.index)}
     >
-      {/* {sensor.index} */}
+      <span>{sensor.index}</span>
     </div>
   );
 }
