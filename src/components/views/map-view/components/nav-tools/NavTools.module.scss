@@ -1,10 +1,15 @@
+@import "../../../../../styles/color-setup.scss";
+
 .nav-tools {
   position: absolute;
   top: 39.7rem;
   right: 1rem;
   z-index: 40;
-}
 
-.btn-group {
-  padding-right: 0.8rem;
+  .btn-color {
+    background-color: $color-three;
+    &:hover {
+      background-color: darken($color-three, 5);
+    }
+  }
 }

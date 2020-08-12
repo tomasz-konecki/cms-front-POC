@@ -13,7 +13,7 @@ function useCurrentTime() {
   }, []);
 
   const tick = () => {
-    setTime(new Date().toLocaleString());
+    setTime(new Date().toLocaleString("en-GB", { timeZone: "Europe/Dublin" }));
   };
 
   return time;

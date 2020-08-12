@@ -1,17 +1,18 @@
 import React, { useEffect, useState, useContext } from "react";
-import { array, bool } from "prop-types";
 import { TreeView, TreeItem } from "@material-ui/lab";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Scrollbars from "react-custom-scrollbars";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+
 import LocationsContext from "contexts/locations-context/LocationsContext";
+
+import HideAllButton from "./components/hide-all-button/HideAllButton";
 
 import classes from "./LocationsTree.module.scss";
 
-function LocationsTree({ loading }) {
+function LocationsTree() {
   const getExpandedFromLocalStorage = () => {
     const localData = localStorage.getItem("expanded");
     return localData ? localData.split(",") : [];
@@ -50,15 +51,7 @@ function LocationsTree({ loading }) {
 
   return (
     <div className={classes["locations"]}>
-      {loading && <h4 style={{ color: "beige" }}>Loading...</h4>}
-      {expanded.length > 0 && (
-        <div
-          className={classes["hide-all-icon-container"]}
-          onClick={handleHideAll}
-        >
-          <ExpandLessIcon className={classes["hide-all-icon"]} />
-        </div>
-      )}
+      <HideAllButton show={expanded.length} onClick={handleHideAll} />
       <Scrollbars autoHeight autoHeightMax="94vh">
         <TreeView
           classes={{ root: classes["locations-tree"] }}
@@ -89,7 +82,10 @@ function LocationsTree({ loading }) {
                         key={subLevel_1.path}
                         nodeId={subLevel_1.path}
                         label={subLevel_1.name}
-                        classes={{ selected: classes["selected"] }}
+                        classes={{
+                          root: classes["tree-item-floor"],
+                          selected: classes["selected"]
+                        }}
                       />
                     </Link>
                   ))}
@@ -102,10 +98,5 @@ function LocationsTree({ loading }) {
     </div>
   );
 }
-
-LocationsTree.propTypes = {
-  locations: array,
-  loading: bool
-};
 
 export default LocationsTree;

@@ -1,3 +1,5 @@
+@import "../../../../../styles/color-setup.scss";
+
 .back-arrow {
   width: 2rem;
   height: 2rem;
@@ -5,11 +7,12 @@
   position: absolute;
   top: 0.8rem;
   left: 1.7rem;
-  color: aliceblue;
-  background-color: rgba(0, 0, 0, 0.5);
+  color: $color-one;
+  background-color: rgba(225, 236, 249, 0.6);
+  color: $color-four;
   border-radius: 50%;
   padding-top: 0.25rem;
-  padding-left: 0.5rem;
+  padding-left: 0.55rem;
   box-sizing: border-box;
   cursor: pointer;
   z-index: 50;

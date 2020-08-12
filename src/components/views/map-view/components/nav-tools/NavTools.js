@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { ButtonGroup, Button } from "@material-ui/core";
 import ZoomInIcon from "@material-ui/icons/ZoomIn";
 import ZoomOutIcon from "@material-ui/icons/ZoomOut";
@@ -7,42 +7,28 @@ import { func } from "prop-types";
 
 import classes from "./NavTools.module.scss";
 
-function NavTools({
-  zoomIn,
-  zoomOut,
-  resetTransform,
-  positionX,
-  positionY,
-  setPositionY,
-  scale
-}) {
-  // useEffect(() => {
-  //   if (scale < 1 && positionY > 700) {
-  //     setPositionY(10);
-  //   }
-  // }, [scale]);
-
+function NavTools({ zoomIn, zoomOut, resetTransform }) {
   return (
     <div className={classes["nav-tools"]}>
-      {/* <div className={classes["close"]} onClick={() => history.goBack()}> */}
-      {/* <ArrowBackIosIcon /> */}
-      {/* <span>X:{positionX}&nbsp;</span>
-        <span>Y:{positionY}&nbsp;</span>
-        <span>scale:{scale}</span> */}
-      {/* </div> */}
       <ButtonGroup
         color="primary"
         aria-label="vertical outlined primary button group"
         variant="contained"
-        classes={{ root: classes["btn-group"] }}
+        size="small"
+        classes={{
+          root: classes["btn-group"]
+        }}
       >
-        <Button onClick={zoomIn}>
+        <Button onClick={zoomIn} classes={{ root: classes["btn-color"] }}>
           <ZoomInIcon />
         </Button>
-        <Button onClick={zoomOut}>
+        <Button onClick={zoomOut} classes={{ root: classes["btn-color"] }}>
           <ZoomOutIcon />
         </Button>
-        <Button onClick={resetTransform}>
+        <Button
+          onClick={resetTransform}
+          classes={{ root: classes["btn-color"] }}
+        >
           <ZoomOutMapIcon />
         </Button>
       </ButtonGroup>
