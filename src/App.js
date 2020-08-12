@@ -6,7 +6,7 @@ import { ApolloProvider } from "@apollo/client";
 import Home from "components/home/Home";
 import FloorView from "components/views/floor-view/FloorView";
 import MapView from "components/views/map-view/MapView";
-import SelectionPrompt from "components/views/main-view/components/selection-prompt/SelectionPrompt";
+import MainView from "components/views/main-view/MainView";
 
 import { LocationsContextProvider } from "contexts/locations-context/LocationsContext";
 import client from "setup/apolloSetup";
@@ -23,7 +23,7 @@ function App() {
               <Route path="/" exact component={Home} />
               <Route path="/floor-view" component={FloorView} />
               <Route path="/map-view" component={MapView} />
-              <Route path="/main-view" component={SelectionPrompt} />
+              <Route path="/main-view" component={MainView} />
             </Switch>
           </Layout>
         </Router>

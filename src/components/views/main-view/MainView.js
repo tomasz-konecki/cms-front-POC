@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useLocation } from "react-router-dom";
-// import { useQuery } from "@apollo/client";
-// import LocationsContext from "contexts/locations-context/LocationsContext";
-// import { GET_ALL_LOCATIONS } from "queries/queries";
+import { useSubscription } from "@apollo/client";
 
-// import LocationsTree from "components/ui/locations-tree/LocationsTree";
+import LocationsContext from "contexts/locations-context/LocationsContext";
+import { LOCATIONS_SUBSCRIPTION } from "queries/queries";
+
 import SelectionPrompt from "./components/selection-prompt/SelectionPrompt";
 
 import classes from "./MainView.module.scss";
@@ -12,15 +12,20 @@ import classes from "./MainView.module.scss";
 function MainView() {
   const { pathname } = useLocation();
   const [renderPrompt, setRenderPrompt] = useState(true);
-  // const { locations, setLocations } = useContext(LocationsContext);
+  const { locations, setLocations } = useContext(LocationsContext);
 
-  // const { data: locationsData, loading, error } = useQuery(GET_ALL_LOCATIONS);
+  const { data, loading } = useSubscription(LOCATIONS_SUBSCRIPTION, {
+    variables: {}
+  });
 
-  // useEffect(() => {
-  //   if (locationsData) {
-  //     setLocations(locationsData.ClientsInfo);
-  //   }
-  // }, [locationsData]);
+  useEffect(() => {
+    if (data) {
+      setLocations(data.ClientsInfoUpdated);
+    }
+
+    console.log("MainView, USE EFFECT, DATA", data);
+    console.log("MainView, USE EFFECT, loading", loading);
+  }, [data]);
 
   useEffect(() => {
     const decodedPathname = decodeURIComponent(pathname);
@@ -34,8 +39,8 @@ function MainView() {
 
   return (
     <div className={classes["main-view"]}>
-      {/* <LocationsTree locations={locations} loading={loading} /> */}
       {renderPrompt && <SelectionPrompt />}
+      {/* <SelectionPrompt /> */}
     </div>
   );
 }
