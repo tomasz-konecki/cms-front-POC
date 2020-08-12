@@ -1,37 +1,27 @@
 @import "../../../styles/color-setup.scss";
 
 .locations {
-  width: 18%;
+  min-width: 18%;
+  max-width: 18%;
   padding-left: 1rem;
-  background-color: $secondary;
+  background-color: $color-two;
   position: relative;
-
-  .hide-all-icon {
-    &-container {
-      position: absolute;
-      top: 0.2rem;
-      right: 0.5rem;
-      border-radius: 50%;
-      background-color: #1f1f1f;
-      z-index: 20;
-      cursor: pointer;
-      width: 1.5rem;
-      height: 1.5rem;
-      box-shadow: 3px 3px 10px -2px rgba(0, 0, 0, 0.75);
-    }
-    color: #ccc;
-  }
+  padding-top: 1rem;
 
   &-tree {
     max-width: 15rem;
-    color: paleturquoise;
+    color: $color-five;
   }
 }
 .group {
-  color: rgb(136, 187, 187);
+  color: lighten($color-four, 5);
+}
+
+.tree-item-floor {
+  color: darken($color-three, 5);
 }
 
 .selected {
-  color: palegoldenrod;
-  background-color: rgba(83, 117, 117, 0.3);
+  color: $color-one;
+  background-color: rgba(35, 106, 185, 0.4);
 }

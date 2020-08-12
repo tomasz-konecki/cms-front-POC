@@ -25,6 +25,7 @@ function MapsPreview({ previews }) {
                   src={preview.src}
                   className={classes["map-preview-gallery-preview-image"]}
                 />
+                <div className={classes["overlay"]}></div>
               </div>
             </Link>
           ))}

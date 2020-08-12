@@ -4,7 +4,7 @@
   left: 0;
   width: 1.6rem;
   height: 1.6rem;
-  background: rgb(165, 165, 165);
+  background-color: rgb(165, 165, 165);
   border-radius: 50%;
   box-shadow: 1px 4px 5px 0px rgba(0, 0, 0, 0.75);
   transition: filter 0.1s ease-in;
@@ -16,9 +16,9 @@
 }
 
 .red {
-  background: red;
+  background-color: red;
 }
 
 .green {
-  background: chartreuse;
+  background-color: chartreuse;
 }

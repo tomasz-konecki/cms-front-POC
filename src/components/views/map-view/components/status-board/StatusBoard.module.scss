@@ -1,50 +1,63 @@
+@import "../../../../../styles/color-setup.scss";
+
 .status {
   &-board {
-    background: darkslategrey;
-    width: 18rem;
+    background: $color-five;
+    width: 16rem;
     padding: 1rem;
     margin-left: 1rem;
     margin-top: 1rem;
     border-radius: 0.3rem;
     box-shadow: 0px 2px 4px 0px rgba(23, 23, 23, 0.75);
     position: absolute;
-    top: -0.5rem;
-    right: 0.2rem;
+    top: -0.7rem;
+    right: 0.4rem;
     z-index: 60;
-    opacity: 0.95;
+    opacity: 0.92;
+
+    &-time {
+      padding-bottom: 1em;
+      padding-left: 0.4rem;
+      color: $color-one;
+      text-align: right;
+      padding-right: 1rem;
+    }
+
+    &-chart {
+      background-color: $color-five;
+      padding: 0.6rem;
+      border-radius: 0.3rem;
+
+      .total {
+        color: $color-one;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        padding-right: 0.3rem;
+        margin-bottom: 0.5rem;
+        border-top: 1px solid #6e6e6e;
+        border-bottom: 1px solid #6e6e6e;
+        text-align: right;
+      }
+
+      .table {
+        margin-left: 1rem;
+
+        &-cell {
+          width: 10rem;
+          height: 1.7rem;
+          position: relative;
+          color: $color-one;
+          text-align: right;
+          padding-right: 1.2rem;
+          font-weight: bold;
+        }
+      }
+    }
   }
+}
 
-  &-title {
-    padding-bottom: 1em;
-    padding-left: 0.4rem;
-    color: lighten(darkslategrey, 40);
-    display: flex;
-    justify-content: space-between;
-  }
-
-  &-values {
-    background-color: #223b3b;
-    padding: 0.6rem;
-    border-radius: 0.3rem;
-
-    .total {
-      color: #ccc;
-    }
-
-    .occupied {
-      color: red;
-    }
-
-    .vacant {
-      color: chartreuse;
-    }
-
-    .off-period {
-      color: rgb(165, 165, 165);
-    }
-
-    .td-width {
-      width: 14.4rem;
-    }
-  }
+.busy,
+.free,
+.off-period {
+  top: 0.1rem;
 }

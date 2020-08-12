@@ -1,0 +1,41 @@
+@import "../../../../../../../styles/color-setup.scss";
+
+.legend {
+  position: relative;
+  height: 6rem;
+  left: 1rem;
+
+  &-sensor {
+    padding-left: 2.5rem;
+
+    &:nth-child(2) {
+      margin-top: 0.7rem;
+    }
+    &:nth-child(3) {
+      margin-top: 0.7rem;
+    }
+
+    &-label {
+      display: inline-block;
+      position: relative;
+      color: $color-one;
+    }
+  }
+}
+
+.free,
+.busy,
+.off-period {
+  transform: scale(0.9);
+}
+.busy {
+  top: 0rem;
+}
+
+.free {
+  top: 2rem;
+}
+
+.off-period {
+  top: 4rem;
+}

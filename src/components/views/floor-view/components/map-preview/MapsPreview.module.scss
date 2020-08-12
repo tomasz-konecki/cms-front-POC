@@ -1,30 +1,48 @@
+@import "../../../../../styles/color-setup.scss";
+
 .map-preview {
   width: 77rem;
-  // border: 1px solid gold;
-  height: 25rem;
+  height: 30rem;
   padding-top: 1rem;
   padding-left: 2rem;
   box-sizing: border-box;
 
   &-gallery {
-    // border: 1px solid red;
     height: 100%;
     display: flex;
-    // justify-content: flex-start;
 
     &-preview {
-      height: 23rem;
+      height: 25rem;
       width: 14rem;
       margin-right: 1.5rem;
-      &-image {
-        height: 100%;
-        width: 100%;
-        cursor: pointer;
-        transition: filter 0.2s ease-out;
+      padding: 0.5rem;
+      position: relative;
+
+      &-name {
+        color: $color-five;
+        padding-bottom: 0.3rem;
+      }
+
+      .overlay {
+        height: 87%;
+        width: 94.2%;
+        background-color: $color-three;
+        position: absolute;
+        top: 2.18rem;
+        left: 0.5rem;
+        opacity: 0;
+        transition: opacity 0.2s ease-out;
 
         &:hover {
-          filter: brightness(70%);
+          opacity: 0.2;
         }
+      }
+
+      &-image {
+        height: 90%;
+        width: 100%;
+        cursor: pointer;
+        border: 1px solid $color-five;
       }
     }
   }

@@ -5,9 +5,7 @@ import classes from "./TopBar.module.scss";
 function TopBar() {
   return (
     <div className={classes["top-bar"]}>
-      <span className={classes["app-name"]}>
-        CONNECTED SPACE MANAGEMENT (POC)
-      </span>
+      <span className={classes["app-name"]}>CONNECTED SPACE MANAGEMENT</span>
       <span className={classes["log-out"]}>Log Out</span>
     </div>
   );

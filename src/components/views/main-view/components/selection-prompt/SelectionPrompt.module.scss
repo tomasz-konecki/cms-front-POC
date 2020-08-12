@@ -1,9 +1,11 @@
+@import "../../../../../styles/color-setup.scss";
+
 .selection-prompt {
   width: 100%;
   height: 100%;
-  background-color: rgb(34, 59, 59);
+  background-color: $color-one;
   font-size: 2.5rem;
-  color: darkslategrey;
+  color: $color-two;
   text-align: center;
   padding-top: 4rem;
 }

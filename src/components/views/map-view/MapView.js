@@ -149,10 +149,6 @@ function MapView() {
     findDesks();
   }, [benches]);
 
-  useEffect(() => {
-    // Function to count desk statuses
-  }, []);
-
   return desks.length ? (
     <div className={classes["map-modal"]}>
       <TransformWrapper
@@ -179,12 +175,7 @@ function MapView() {
         }) => (
           <div className={classes["map"]}>
             <BackArrow />
-            <StatusBoard
-              total={mapSensors.length}
-              vacant={vacant}
-              occupied={occupied}
-              // offPeriod={offPeriod}
-            />
+            <StatusBoard desks={desks} />
             <TransformComponent>
               <div className={classes["map-container"]}>
                 <div className={classes["map-img-container"]}>
