@@ -14,6 +14,7 @@ export function LocationsContextProvider({ children }) {
 
   useEffect(() => {
     localStorage.setItem("csm-locations", JSON.stringify(locations));
+    console.log(">>> LocationsContext, locations", locations);
   }, [locations]);
 
   return (
