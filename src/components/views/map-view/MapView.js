@@ -27,13 +27,11 @@ function MapView() {
   });
   const [benches, setBenches] = useState([]);
   const [desks, setDesks] = useState([]);
-  let occupied = 0;
-  let vacant = 0;
-  let offPeriod = 0;
 
   const setMapImageSource = (mapPath, queryArray) => {
     queryArray.pop();
     const previewKey = `${queryArray.join("/")}`;
+
     const imgSource = previews[previewKey].filter(
       item => item.path === mapPath
     )[0].src;
@@ -43,13 +41,17 @@ function MapView() {
 
   const createSitePath = queryArray => {
     queryArray.pop();
-    setSitePath(queryArray.join("/"));
+    const path = queryArray.join("/");
+
+    setSitePath(path);
   };
 
   const createFloorPath = () => {
     const compartmentPathArray = compartmentPath.split("/");
     compartmentPathArray.pop();
     const floor = compartmentPathArray.join("/");
+
+    console.log("Floor path:", floor);
 
     setFloorPath(floor);
   };
@@ -84,6 +86,7 @@ function MapView() {
   const findCompartment = () => {
     const floorObject = findFloor();
     const floorSublocalizationsArray = floorObject.subLocalizations || [];
+
     let compartmentObj = { subLocalizations: [] };
 
     floorSublocalizationsArray.forEach(item => {
@@ -194,10 +197,6 @@ function MapView() {
               zoomIn={zoomIn}
               zoomOut={zoomOut}
               resetTransform={resetTransform}
-              positionX={positionX}
-              positionY={positionY}
-              setPositionY={setPositionY}
-              scale={scale}
             />
           </div>
         )}

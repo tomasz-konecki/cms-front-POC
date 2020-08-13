@@ -16,7 +16,7 @@ function Home() {
   const [formTouched, setFormTouched] = useState(false);
   const passwordInputRef = useRef(null);
   const { push } = useHistory();
-  const [getAllLOcations, { loading, data, error }] = useLazyQuery(
+  const [getAllLocations, { loading, data, error }] = useLazyQuery(
     GET_ALL_LOCATIONS
   );
   const { locations, setLocations } = useContext(LocationsContext);
@@ -46,12 +46,16 @@ function Home() {
   };
 
   const handleSignIn = () => {
-    getAllLOcations({ variables: {} });
+    getAllLocations({ variables: {} });
   };
 
   useEffect(() => {
     if (data) {
       setLocations(data.ClientsInfo);
+    }
+
+    if (error) {
+      console.error("!!! ERROR:", error.message);
     }
   }, [data, loading, error]);
 
@@ -128,9 +132,9 @@ function Home() {
             )}
           </div>
         </form>
-      ) : loading && locations.length === 0 ? (
+      ) : (
         <div className={classes["loader"]}>LOADING LOCATIONS DATA...</div>
-      ) : null}
+      )}
     </div>
   );
 }

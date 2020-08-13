@@ -14,12 +14,12 @@ import classes from "./LocationsTree.module.scss";
 
 function LocationsTree() {
   const getExpandedFromLocalStorage = () => {
-    const localData = localStorage.getItem("expanded");
+    const localData = sessionStorage.getItem("expanded");
     return localData ? localData.split(",") : [];
   };
   const [expanded, setExpanded] = useState(getExpandedFromLocalStorage());
   const getSelectedFromLocalStorage = () => {
-    const localData = localStorage.getItem("selected");
+    const localData = sessionStorage.getItem("selected");
     return localData ? localData : "";
   };
   const [selected, setSelected] = useState(getSelectedFromLocalStorage());
@@ -28,25 +28,25 @@ function LocationsTree() {
 
   const handleToggle = (_, nodeIds) => {
     setExpanded(nodeIds);
-    localStorage.setItem("expanded", nodeIds);
+    sessionStorage.setItem("expanded", nodeIds);
     // push("/main-view");
   };
 
   const handleSelect = (_, nodeIds) => {
     setSelected(nodeIds);
-    localStorage.setItem("selected", nodeIds);
+    sessionStorage.setItem("selected", nodeIds);
     // push("/main-view");
   };
 
   const handleHideAll = () => {
     setExpanded([]);
-    localStorage.setItem("expanded", "");
-    localStorage.setItem("selected", "");
+    sessionStorage.setItem("expanded", "");
+    sessionStorage.setItem("selected", "");
     push("/main-view");
   };
 
   useEffect(() => {
-    localStorage.setItem("csm-locations", JSON.stringify(locations));
+    sessionStorage.setItem("csm-locations", JSON.stringify(locations));
   }, [locations]);
 
   return (

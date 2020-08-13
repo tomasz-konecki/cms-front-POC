@@ -7,13 +7,13 @@ const LocationsContext = createContext({
 
 export function LocationsContextProvider({ children }) {
   const getLocationsFromLocalStorage = () => {
-    const localData = localStorage.getItem("csm-locations");
+    const localData = sessionStorage.getItem("csm-locations");
     return localData ? JSON.parse(localData) : [];
   };
   const [locations, setLocations] = useState(getLocationsFromLocalStorage());
 
   useEffect(() => {
-    localStorage.setItem("csm-locations", JSON.stringify(locations));
+    sessionStorage.setItem("csm-locations", JSON.stringify(locations));
     console.log(">>> LocationsContext, locations", locations);
   }, [locations]);
 

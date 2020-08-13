@@ -1,3 +1,7 @@
+// BOI POC
+// POC
+import boi_poc from "assets/maps/boi-poc/poc/boi-poc.png";
+
 // Baggot Plaza
 // Floor 1
 import bp_f1_c3 from "assets/maps/baggot-plaza/floor-1/bpl_f1_c3.png";
@@ -20,6 +24,9 @@ import bp_f5_cB from "assets/maps/baggot-plaza/floor-5/BP_F5_CompB.png";
 import bp_f6_cA from "assets/maps/baggot-plaza/floor-6/BP_F6_CompA.png";
 
 const previews = {
+  "IRL/D18_PH48/BOI POC/POC": [
+    { name: "POC", src: boi_poc, path: "IRL/D18_PH48/BOI POC/POC/POC" }
+  ],
   "IRL/D18_PH48/BPL/F01": [
     { name: "Compartment C", src: bp_f1_c3, path: "IRL/D18_PH48/BPL/F01/C03" }
   ],

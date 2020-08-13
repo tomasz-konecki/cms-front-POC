@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 import classes from "./Sensor.module.scss";
 
-function Sensor({ sensor, status, sensorClass }) {
+function Sensor({ sensor, status, sensorClass = null }) {
   return (
     <div
       className={clsx(classes["sensor"], {

@@ -15,6 +15,7 @@ function FloorView({ handleMapSelection }) {
 
   useEffect(() => {
     const previewKey = `${query.get("floor")}`;
+
     setPreviewsArray(previews[previewKey]);
   }, [query]);
 

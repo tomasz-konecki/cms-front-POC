@@ -1,16 +1,14 @@
+@import "../../styles/color-setup.scss";
+
 .home {
-  // background-color: darkcyan;
-  // height: 88vh;
-  padding-top: 5rem;
+  padding-top: 12rem;
   width: 100%;
 
   .form {
-    width: 30rem;
+    width: 22rem;
     height: 10rem;
-    // margin: 0 auto;
-    margin-left: 18rem;
-    margin-top: 8rem;
-    background-color: rgb(255, 255, 255);
+    margin: 0 auto;
+    background-color: #fff;
     border-radius: 0.3rem;
     box-shadow: 0px 2px 4px 0px rgba(23, 23, 23, 0.75);
 
@@ -23,10 +21,9 @@
   }
 
   .loader {
-    color: beige;
+    color: $color-three;
     font-size: 1.8rem;
-    padding-left: 21rem;
-    margin-top: 10rem;
+    text-align: center;
   }
 
   .button-container {

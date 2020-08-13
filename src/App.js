@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "components/ui/layout/Layout";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import { ApolloProvider } from "@apollo/client";
