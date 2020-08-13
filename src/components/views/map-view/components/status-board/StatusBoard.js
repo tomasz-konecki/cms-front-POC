@@ -36,9 +36,13 @@ function StatusBoard({ desks }) {
   };
 
   useEffect(() => {
-    setTotal(desks.length);
     setStatuses();
   }, [desks]);
+
+  useEffect(() => {
+    const t = occupied + vacant + offPeriod;
+    setTotal(t);
+  }, [occupied, vacant, offPeriod]);
 
   return (
     <div className={classes["status-board"]}>
